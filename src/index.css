@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --color-bg: #F8F9FA;
+  --color-amber: #E8A020;
+  --color-navy: #0F1B2D;
+  --color-crimson: #DC2626;
+  --color-teal: #10B981;
+  --color-steel-blue: #3B82F6;
+}
+
+body {
+  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  background-color: #F8F9FA;
+  color: #0F1B2D;
+}
+
+/* Structured / Dealership Utility Classes */
+.brutal-border {
+  border: 3px solid #0F1B2D;
+}
+
+.brutal-border-4 {
+  border: 4px solid #0F1B2D;
+}
+
+.brutal-shadow {
+  box-shadow: 4px 4px 0px #0F1B2D;
+}
+
+.brutal-shadow-sm {
+  box-shadow: 3px 3px 0px #0F1B2D;
+}
+
+.brutal-shadow-lg {
+  box-shadow: 6px 6px 0px #0F1B2D;
+}
+
+.brutal-shadow-xl {
+  box-shadow: 8px 8px 0px #0F1B2D;
+}
+
+.brutal-btn {
+  border: 3px solid #0F1B2D;
+  box-shadow: 4px 4px 0px #0F1B2D;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.brutal-btn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #0F1B2D;
+}
+
+.brutal-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #0F1B2D;
+}
+
+.brutal-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  background-color: #CBD5E1;
+}
+
+.brutal-input {
+  border: 3px solid #0F1B2D;
+  box-shadow: 3px 3px 0px #0F1B2D;
+  background-color: #FFFFFF;
+  padding: 0.6rem 0.8rem;
+  font-weight: 700;
+  outline: none;
+  transition: all 0.1s ease-in-out;
+}
+
+.brutal-input:focus {
+  box-shadow: 5px 5px 0px #0F1B2D;
+  background-color: #EFF6FF;
+  border-color: #0F1B2D;
+}
+
+.brutal-card {
+  border: 4px solid #0F1B2D;
+  box-shadow: 6px 6px 0px #0F1B2D;
+  background-color: #FFFFFF;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F9FA;
+  border-left: 2px solid #0F1B2D;
+}
+::-webkit-scrollbar-thumb {
+  background: #0F1B2D;
+}

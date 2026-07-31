@@ -1,0 +1,6 @@
+{
+  "name": "Car Dealership Inventory System",
+  "description": "Neo-Brutalist full-stack inventory management system with JWT auth, vehicle purchasing, stock management, and search filtering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

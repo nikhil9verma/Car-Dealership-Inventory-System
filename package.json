@@ -1,0 +1,60 @@
+{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx server.ts",
+    "build": "npx prisma generate && vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "start": "node dist/server.cjs",
+    "test": "jest --coverage --forceExit",
+    "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "@prisma/client": "^5.22.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "groq-sdk": "^1.4.1",
+    "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "vite": "^6.2.3",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.14.0",
+    "@types/supertest": "^7.2.1",
+    "autoprefixer": "^10.4.21",
+    "esbuild": "^0.25.0",
+    "jest": "^30.4.2",
+    "prisma": "^5.22.0",
+    "supertest": "^7.2.2",
+    "tailwindcss": "^4.1.14",
+    "ts-jest": "^29.4.12",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3"
+  },
+  "allowScripts": {
+    "@google/genai@2.15.0": true,
+    "@prisma/client@5.22.0": true,
+    "@prisma/engines@5.22.0": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.1": true,
+    "prisma@5.22.0": true,
+    "protobufjs@7.6.5": true,
+    "unrs-resolver@1.12.2": true
+  }
+}

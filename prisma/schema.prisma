@@ -1,0 +1,55 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("USER")
+  createdAt    DateTime @default(now())
+}
+
+model Vehicle {
+  id                 String   @id @default(uuid())
+  make               String
+  model              String
+  category           String
+  price              Float
+  quantity           Int
+  variant            String   @default("")
+  year               Int      @default(2024)
+  vin                String   @default("")
+  engineType         String   @default("V6 Turbo")
+  engineDisplacement String   @default("3.0L")
+  horsepower         Int      @default(350)
+  transmission       String   @default("Automatic")
+  fuelType           String   @default("Gasoline")
+  mileage            Int      @default(0)
+  seatingCapacity    Int      @default(5)
+  drivetrain         String   @default("AWD")
+  status             String   @default("Available")
+  condition          String   @default("New")
+  images             String   @default("[]")
+  tags               String   @default("[]")
+  listedDate         DateTime @default(now())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Inquiry {
+  id          String   @id @default(uuid())
+  vehicleId   String
+  userName    String
+  userEmail   String
+  userPhone   String
+  type        String   @default("Test Drive")
+  preferredDate String?
+  notes       String?
+  createdAt   DateTime @default(now())
+}
