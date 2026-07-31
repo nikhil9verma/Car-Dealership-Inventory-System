@@ -551,3 +551,105 @@
 >
 > For each item, tell me the exact command or file to check,
 > not just the abstract concern.
+
+---
+
+## Phase 9 — Final Debugging, Git Init & Push Prep
+
+---
+
+**Prompt 9.1 — App Not Starting: Full Environment Bootstrap**
+
+> I have a project with `package.json`, `prisma/schema.prisma`, and source files
+> but no `node_modules`, no `.env`, and no SQLite database.
+> The README says to run `npm run dev` but that fails because nothing is set up.
+>
+> Walk me through the complete sequence of commands to go from zero to a running
+> dev server on Windows — including any gotchas with Prisma client generation,
+> database creation, and seeding. What order do the commands need to run in and why?
+
+---
+
+**Prompt 9.2 — 401 on Public Catalog: Stale Token in localStorage**
+
+> After reseeding the database, the app loads but the vehicle catalog returns 401.
+> The browser console shows:
+> ```
+> GET /api/vehicles/search?sortBy=newest&page=1&limit=9  401 (Unauthorized)
+> ```
+>
+> The route logic switches to `/api/vehicles/search` (auth required) when a token
+> exists in localStorage, and to `/api/vehicles/public/catalog` (no auth) when it
+> doesn't. The user has a token stored from a previous session before the DB was wiped.
+>
+> What's the correct fix? I need:
+> 1. On app mount, validate the stored token and clear it if the server rejects it
+> 2. Inside `fetchVehicles`, gracefully handle a 401 mid-session — fall back to the
+>    public catalog rather than showing an error
+> 3. No breaking changes to the existing auth flow
+
+---
+
+**Prompt 9.3 — Login Always 401: Wrong Credentials in Preset Buttons**
+
+> My login page has two "quick preset" buttons that fill in demo credentials.
+> They're showing `admin@dealership.com / admin123` and `customer@example.com / customer123`.
+> Every login attempt returns 401 even with the correct password.
+>
+> The seed file creates:
+> - `admin@incubytemotors.com` hashed with `AdminPassword123!`
+> - `driver@incubytemotors.com` hashed with `UserPassword123!`
+>
+> Fix the preset buttons and also find out why the login overlay doesn't close
+> after a successful login even when credentials are correct.
+
+---
+
+**Prompt 9.4 — Post-Login Redirect Not Working**
+
+> After a successful login the `login()` context function is called and the JWT
+> is stored, but the page doesn't change — the login form stays on screen.
+>
+> Here's how `App.tsx` renders the login page:
+> ```tsx
+> if (authOverlay === 'login') {
+>   return <LoginPage onNavigateRegister={() => setAuthOverlay('register')} />;
+> }
+> ```
+>
+> And `LoginPage.tsx` on success:
+> ```tsx
+> login(data.token, data.user);
+> if (onReturnToShowroom) onReturnToShowroom();
+> ```
+>
+> `onReturnToShowroom` is never passed from `App.tsx`, so the overlay state
+> never resets to `'none'`. What's the minimal fix — add a new prop or restructure?
+
+---
+
+**Prompt 9.5 — Git Init, .gitattributes, and Initial Commit on Windows**
+
+> I have a finished project that's never been in git. I need to:
+> 1. Initialize the repo
+> 2. Stage all files (respecting `.gitignore`)
+> 3. Verify that `.env`, `node_modules`, and `prisma/*.db` are correctly excluded
+> 4. Fix the CRLF line-ending warnings that appear during `git add` on Windows
+> 5. Make a well-structured initial commit with a `Co-authored-by` trailer for AI
+>
+> The multi-line commit message in PowerShell keeps failing with parse errors.
+> What's the right way to write a multi-line commit message on Windows without
+> using a temp file or changing the default editor?
+
+---
+
+**Prompt 9.6 — Updating README with Real Test Output**
+
+> The README has a test report section that was written manually and shows 16 tests.
+> I just ran `npm test` and the actual output shows 29 tests passing across 4 suites,
+> with a coverage report. The timing also differs from what was in the README.
+>
+> Update the test report section with the real output. Also update the test count
+> in any badges or summary lines. The coverage table should be included so reviewers
+> can see which routes have lower coverage and why (e.g., the public catalog routes
+> aren't covered by the current test suite because tests use the auth'd endpoints).

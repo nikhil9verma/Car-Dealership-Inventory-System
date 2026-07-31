@@ -142,39 +142,39 @@ npm run test
 
 ```
  PASS  tests/unit/auth.test.ts
-  Auth Unit Tests
-    √ should hash passwords correctly
-    √ should verify JWT tokens correctly
-    √ should reject invalid tokens
-
- PASS  tests/integration/auth.test.ts
-  Auth Integration Tests
-    √ POST /api/auth/register should create a new user and return token
-    √ POST /api/auth/login should authenticate user and return token
-    √ POST /api/auth/login should fail with invalid credentials
+ PASS  tests/integration/chatbot.test.ts
+   ● Console
+     console.error
+       Groq API error: Groq API is unavailable
+       (Expected — this is the 502 fallback test verifying no API key leaks)
 
  PASS  tests/integration/vehicles.test.ts
-  Vehicles Integration Tests
-    √ GET /api/vehicles should return paginated vehicle list
-    √ GET /api/vehicles/search should filter vehicles by category and price
-    √ POST /api/vehicles should allow ADMIN to add a vehicle
-    √ POST /api/vehicles should forbid USER from adding a vehicle
-    √ PUT /api/vehicles/:id should update vehicle details for ADMIN
-    √ DELETE /api/vehicles/:id should remove vehicle for ADMIN
-    √ POST /api/vehicles/:id/purchase should decrement inventory quantity
-    √ POST /api/vehicles/:id/restock should increment inventory quantity for ADMIN
+ PASS  tests/integration/auth.test.ts
 
- PASS  tests/integration/chatbot.test.ts
-  Chatbot Integration Tests
-    √ POST /api/chatbot/query should respond with inventory information grounded in DB
-    √ POST /api/chatbot/query should handle missing GROQ_API_KEY gracefully
+-------------------|---------|----------|---------|---------|---------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+-------------------|---------|----------|---------|---------|---------------------
+All files          |   68.36 |    47.57 |   55.17 |   72.04 |
+ server            |   68.75 |       30 |       0 |   68.75 |
+  app.ts           |   70.58 |        0 |       0 |   70.58 | 17,22-25
+  db.ts            |   66.66 |       50 |     100 |   66.66 | 7,15-20
+ server/middleware  |    90.9 |       90 |     100 |    90.9 |
+  auth.ts          |    90.9 |       90 |     100 |    90.9 | 40,46
+ server/routes     |   66.25 |    46.23 |   52.17 |   70.66 |
+  auth.ts          |   94.73 |    77.77 |     100 |   94.73 | 73-74
+  chatbot.ts       |     100 |    66.66 |     100 |     100 | 39,47-66
+  vehicles.ts      |   54.85 |    41.02 |    42.1 |      60 | (public catalog routes)
+-------------------|---------|----------|---------|---------|---------------------
 
 Test Suites: 4 passed, 4 total
-Tests:       16 passed, 16 total
+Tests:       29 passed, 29 total
 Snapshots:   0 total
-Time:        2.845 s
+Time:        39.609 s
 Ran all test suites.
 ```
+
+> [!NOTE]
+> The lower coverage on `vehicles.ts` is expected — the public catalog (`/api/vehicles/public/catalog`), inquiry, and stats routes are not covered by the current test suite, which focuses on authenticated CRUD, purchase, restock, and search routes. `chatbot.ts` achieves **100% statement coverage**.
 
 ---
 
